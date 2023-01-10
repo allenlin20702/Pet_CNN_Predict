@@ -83,7 +83,7 @@ try:
     #建立池化層1
     model.add(MaxPooling2D(pool_size=(2, 2))) #(10,40,40)
     
-    # Dropout層防止過度擬合，斷開比例:0.1
+    # Dropout層防止過度擬合，斷開比例:0.2
     model.add(Dropout(0.2))    
     
     #建立卷積層2
