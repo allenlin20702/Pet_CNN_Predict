@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from keras.models import Sequential
 from keras.layers import Conv2D,MaxPooling2D,Dropout,Flatten,Dense
 np.random.seed(10) #隨機產生整數的亂數
+from sklearn.metrics import classification_report
     
 def show_images_labels_predictions(images,labels,
                                   predictions,start_id,num=10):
@@ -83,7 +84,7 @@ try:
     model.add(MaxPooling2D(pool_size=(2, 2))) #(10,40,40)
     
     # Dropout層防止過度擬合，斷開比例:0.1
-    model.add(Dropout(0.1))    
+    model.add(Dropout(0.2))    
     
     #建立卷積層2
     model.add(Conv2D(filters=10, 
@@ -141,6 +142,13 @@ try:
     
     #accuracy準確率 loss損失函數
     show_accuracy_loss(train_history)
+    
+    #confusion matrix
+    print("\n",pd.crosstab(test_label,prediction,rownames=['actual label'],colnames=['prediction']),"\n")
+
+    #顯示precision, recall, f1-score
+    print('classification')
+    print(classification_report(test_label,prediction))
     
 except:
     print(".npy 檔未建立!")    
