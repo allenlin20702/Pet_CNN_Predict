@@ -87,7 +87,7 @@ try:
     model.add(Dropout(0.2))    
     
     #建立卷積層2
-    model.add(Conv2D(filters=10, 
+    model.add(Conv2D(filters=20, 
                       kernel_size=(5,5),  
                       padding='same',
                       activation='relu'))
