@@ -59,7 +59,7 @@ try:
     test_label=np.load(imagesavepath+'test_label.npy')       
     print("載入 *.npy 檔!") 
     
-    # 將 Features 特徵值換為 圖片數量*80*80*3 的 4 維矩陣
+    # 將 Features 特徵值換為 圖片數量 40*40*3 的 4 維矩陣
     train_feature_vector =train_feature.reshape(len(train_feature), 40,40,3).astype('float32')
     test_feature_vector = test_feature.reshape(len( test_feature), 40,40,3).astype('float32')
     
@@ -81,7 +81,7 @@ try:
                       activation='relu'))
     
     #建立池化層1
-    model.add(MaxPooling2D(pool_size=(2, 2))) #(10,40,40)
+    model.add(MaxPooling2D(pool_size=(2, 2))) #(20,20,10)
     
     # Dropout層防止過度擬合，斷開比例:0.2
     model.add(Dropout(0.2))    
@@ -93,7 +93,7 @@ try:
                       activation='relu'))
     
     #建立池化層2
-    model.add(MaxPooling2D(pool_size=(2, 2))) #(20,20,20)
+    model.add(MaxPooling2D(pool_size=(2, 2))) #(10,10,20)
     
     # Dropout層防止過度擬合，斷開比例:0.2
     model.add(Dropout(0.2))
@@ -149,6 +149,5 @@ try:
     #顯示precision, recall, f1-score
     print('classification')
     print(classification_report(test_label,prediction))
-    
 except:
     print(".npy 檔未建立!")    
